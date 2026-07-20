@@ -20,7 +20,7 @@ try {
                 $base64Data = $reader.ReadToEnd()
                 
                 $bytes = [System.Convert]::FromBase64String($base64Data)
-                $savePath = Join-Path "d:\antigravity_file\assets" $name
+                $savePath = Join-Path "$PSScriptRoot\assets" $name
                 [System.IO.File]::WriteAllBytes($savePath, $bytes)
                 
                 $response.StatusCode = 200
@@ -37,7 +37,7 @@ try {
             $decodedUrl = [System.Uri]::UnescapeDataString($url)
             if ($null -eq $decodedUrl) { $decodedUrl = $url }
             
-            $filePath = Join-Path "d:\antigravity_file" $decodedUrl.TrimStart('/')
+            $filePath = Join-Path $PSScriptRoot $decodedUrl.TrimStart('/')
             
             if (Test-Path $filePath -PathType Leaf) {
                 $bytes = [System.IO.File]::ReadAllBytes($filePath)

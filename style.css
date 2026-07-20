@@ -25,6 +25,10 @@
   
   --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: all 0.2s ease;
+
+  /* Mobile scaling variables based on viewport width vs desktop layout width */
+  --hero-scale: min(1, calc((100vw - 40px) / 900));
+  --results-scale: min(1, calc((100vw - 40px) / 980));
 }
 
 /* --- BASICS & RESET --- */
@@ -208,8 +212,12 @@ nav ul li a:hover {
 }
 
 @media (max-width: 992px) {
-  nav, .nav-cta {
+  nav {
     display: none;
+  }
+  .nav-cta {
+    padding: 10px 20px;
+    font-size: 0.82rem;
   }
 }
 
@@ -331,13 +339,11 @@ nav ul li a:hover {
   100% { transform: rotate( 0.0deg) }
 }
 
-/* CENTRAL COMPOSITION WITH PORTRAIT */
 .hero-composition {
   position: relative;
-  width: 100%;
+  width: 900px;
   height: 580px;
   margin: 60px auto 0 auto;
-  max-width: 1100px;
 }
 
 .hero-portrait-container {
@@ -522,40 +528,14 @@ nav ul li a:hover {
   100% { transform: translateY(0px) rotate(0deg); }
 }
 
-/* RESPONSIVE HERO */
-@media (max-width: 992px) {
+/* RESPONSIVE HERO VIA DYNAMIC SCALING */
+@media (max-width: 940px) {
   .hero-composition {
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    padding-bottom: 40px;
-    margin-top: 40px;
-  }
-  .hero-portrait-container {
-    position: relative;
-    left: auto;
-    transform: none;
-    margin-bottom: 20px;
-  }
-  .hero-circle-bg {
-    width: 360px;
-    height: 360px;
-  }
-  .floating-tag-wrapper {
-    position: relative;
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-    transform: none !important;
-    display: inline-flex;
-    margin: 6px;
-  }
-  .floating-tag {
-    padding: 10px 18px;
-    font-size: 0.85rem;
-    animation: none !important;
+    height: calc(580px * var(--hero-scale));
+    margin: calc(60px * var(--hero-scale)) auto 0 auto;
+    left: 50%;
+    transform: translateX(-50%) scale(var(--hero-scale));
+    transform-origin: top center;
   }
 }
 
@@ -1568,13 +1548,16 @@ footer {
   gap: 40px;
   margin-top: 60px;
 }
-
-@media (max-width: 992px) {
+@media (max-width: 1020px) {
   .results-grid {
-    grid-template-columns: 1fr;
-    max-width: 320px;
-    margin: 60px auto 0 auto;
-    gap: 50px;
+    width: 980px;
+    height: calc(600px * var(--results-scale));
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%) scale(var(--results-scale));
+    transform-origin: top center;
+    margin-top: calc(60px * var(--results-scale));
+    margin-bottom: 0;
   }
 }
 
