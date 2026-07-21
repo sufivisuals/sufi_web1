@@ -1057,11 +1057,19 @@ nav ul li a:hover {
 }
 
 @media (max-width: 992px) {
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 576px) {
-  .services-grid { grid-template-columns: 1fr; }
+  .services-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .service-card {
+    flex: 0 1 350px !important;
+    width: 100% !important;
+    max-width: 380px !important;
+    box-sizing: border-box !important;
+  }
 }
 
 .service-card {
@@ -1140,11 +1148,19 @@ nav ul li a:hover {
 }
 
 @media (max-width: 992px) {
-  .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 768px) {
-  .testimonials-grid { grid-template-columns: 1fr; }
+  .testimonials-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .testimonial-card {
+    flex: 0 1 350px !important;
+    width: 100% !important;
+    max-width: 380px !important;
+    box-sizing: border-box !important;
+  }
 }
 
 .testimonial-card {
@@ -1717,21 +1733,22 @@ footer {
   margin: 60px auto 0 auto;
   max-width: 980px;
 }
-@media (max-width: 1020px) {
+@media (max-width: 992px) {
   .results-grid {
-    width: 980px;
-    height: calc(600px * var(--results-scale));
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%) scale(var(--results-scale));
-    transform-origin: top center;
-    margin-top: calc(60px * var(--results-scale));
-    margin-bottom: 0;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 36px !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    left: auto !important;
+    margin: 40px auto 0 auto !important;
   }
 }
 
 #client-results {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .phone-container {
@@ -1739,9 +1756,18 @@ footer {
   justify-content: center;
   align-items: center;
   perspective: 1000px;
-  transform: translateY(100px);
+  transform: translateY(60px);
   opacity: 0;
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+@media (max-width: 992px) {
+  .phone-container {
+    transform: none !important;
+    opacity: 1 !important;
+    margin: 0 auto !important;
+    transition: none !important;
+  }
 }
 
 .reveal.revealed .phone-container {
@@ -1766,15 +1792,22 @@ footer {
   display: flex;
   flex-direction: column;
   box-sizing: content-box;
-  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
-              border-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
-              box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.phone-container.scroll-active .phone-frame {
+  transform: translateY(-6px) scale(1.025);
+  border-color: var(--color-gold-bright) !important;
+  box-shadow: 0 15px 35px rgba(212, 175, 55, 0.25), 0 0 20px rgba(212, 175, 55, 0.15) !important;
 }
 
 .phone-container:hover .phone-frame {
-  transform: translateY(-8px) scale(1.02);
-  border-color: var(--color-gold-bright);
-  box-shadow: 0 15px 35px rgba(212, 175, 55, 0.25), 0 0 20px rgba(212, 175, 55, 0.15);
+  transform: translateY(-8px) scale(1.04);
+  border-color: var(--color-gold-bright) !important;
+  box-shadow: 0 20px 45px rgba(212, 175, 55, 0.3), 0 0 25px rgba(212, 175, 55, 0.2) !important;
+  z-index: 2;
 }
 
 /* Phone Top Elements */

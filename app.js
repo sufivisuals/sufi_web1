@@ -388,7 +388,8 @@ document.addEventListener('DOMContentLoaded', () => {
     '#services .service-card, ' +
     '#growth-system .timeline-step, ' +
     '#makeup-artistry .reel-card, ' +
-    '#short-form .reel-card'
+    '#short-form .reel-card, ' +
+    '#client-results .phone-container'
   );
 
   if (scrollHighlightElements.length > 0) {
