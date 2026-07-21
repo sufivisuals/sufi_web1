@@ -40,7 +40,8 @@ try {
             $filePath = Join-Path $PSScriptRoot $decodedUrl.TrimStart('/')
             
             if (Test-Path $filePath -PathType Leaf) {
-                $bytes = [System.IO.File]::ReadAllBytes($filePath)
+                $fileInfo = New-Object System.IO.FileInfo($filePath)
+                $totalBytes = $fileInfo.Length
                 
                 $ext = [System.IO.Path]::GetExtension($filePath).ToLower()
                 if ($ext -eq ".html") { $contentType = "text/html; charset=utf-8" }
@@ -54,9 +55,52 @@ try {
                 else { $contentType = "application/octet-stream" }
                 
                 $response.ContentType = $contentType
-                $response.Headers.Add("Cache-Control", "public, max-age=86400")
-                $response.ContentLength64 = $bytes.Length
-                $response.OutputStream.Write($bytes, 0, $bytes.Length)
+                $response.Headers.Add("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
+                $response.Headers.Add("Accept-Ranges", "bytes")
+                
+                $rangeHeader = $request.Headers["Range"]
+                if ($null -ne $rangeHeader -and $rangeHeader.StartsWith("bytes=")) {
+                    $range = $rangeHeader.Replace("bytes=", "").Split("-")
+                    $start = [int64]$range[0]
+                    $end = $totalBytes - 1
+                    if ($range.Length -gt 1 -and !([string]::IsNullOrWhiteSpace($range[1]))) {
+                        $end = [int64]$range[1]
+                    }
+                    if ($end -ge $totalBytes) { $end = $totalBytes - 1 }
+                    $length = $end - $start + 1
+                    
+                    $response.StatusCode = 206
+                    $response.Headers.Add("Content-Range", "bytes $start-$end/$totalBytes")
+                    $response.ContentLength64 = $length
+                    
+                    $stream = [System.IO.File]::OpenRead($filePath)
+                    try {
+                        $null = $stream.Seek($start, [System.IO.SeekOrigin]::Begin)
+                        $chunkSize = [Math]::Min($length, 65536)
+                        $buffer = New-Object byte[] $chunkSize
+                        $bytesRemaining = $length
+                        while ($bytesRemaining -gt 0) {
+                            $readSize = [Math]::Min($buffer.Length, $bytesRemaining)
+                            $read = $stream.Read($buffer, 0, $readSize)
+                            if ($read -le 0) { break }
+                            $response.OutputStream.Write($buffer, 0, $read)
+                            $bytesRemaining -= $read
+                        }
+                    } finally {
+                        $stream.Close()
+                    }
+                } else {
+                    $response.ContentLength64 = $totalBytes
+                    $stream = [System.IO.File]::OpenRead($filePath)
+                    try {
+                        $buffer = New-Object byte[] 65536
+                        while (($read = $stream.Read($buffer, 0, $buffer.Length)) -gt 0) {
+                            $response.OutputStream.Write($buffer, 0, $read)
+                        }
+                    } finally {
+                        $stream.Close()
+                    }
+                }
             } else {
                 $response.StatusCode = 404
                 $msg = [System.Text.Encoding]::UTF8.GetBytes("404 Not Found: $filePath")

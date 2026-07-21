@@ -1357,11 +1357,42 @@ footer {
 /* --- SCROLL REVEALS --- */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 
 .reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered entry for main content grids inside revealed sections */
+.reveal .short-form-grid,
+.reveal .services-grid,
+.reveal .pain-points-grid,
+.reveal .results-grid,
+.reveal .testimonials-grid,
+.reveal .pricing-grid,
+.reveal .faq-wrapper,
+.reveal .contact-wrapper,
+.reveal .growth-timeline-container {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.15s;
+  will-change: transform, opacity;
+}
+
+.reveal.revealed .short-form-grid,
+.reveal.revealed .services-grid,
+.reveal.revealed .pain-points-grid,
+.reveal.revealed .results-grid,
+.reveal.revealed .testimonials-grid,
+.reveal.revealed .pricing-grid,
+.reveal.revealed .faq-wrapper,
+.reveal.revealed .contact-wrapper,
+.reveal.revealed .growth-timeline-container {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1506,7 +1537,8 @@ footer {
 .section-header, .contact-wrapper h2 {
   opacity: 0;
   transform: translateY(30px) scale(0.98);
-  transition: opacity 1.2s cubic-bezier(0.215, 0.610, 0.355, 1), transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 
 .reveal.revealed .section-header, .reveal.revealed .contact-wrapper h2 {
