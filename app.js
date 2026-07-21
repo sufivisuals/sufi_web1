@@ -411,4 +411,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     scrollHighlightElements.forEach(el => highlightObserver.observe(el));
   }
+
+  // --- PREMIUM INERTIAL SMOOTH SCROLL ---
+  if (window.innerWidth > 992) {
+    let targetScrollY = window.scrollY;
+    let currentScrollY = window.scrollY;
+    let isMoving = false;
+    const easeSpeed = 0.075;
+
+    window.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      targetScrollY += e.deltaY * 0.85;
+      
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      targetScrollY = Math.max(0, Math.min(targetScrollY, maxScroll));
+      
+      if (!isMoving) {
+        isMoving = true;
+        requestAnimationFrame(updateScroll);
+      }
+    }, { passive: false });
+
+    window.addEventListener('scroll', () => {
+      if (!isMoving) {
+        targetScrollY = window.scrollY;
+        currentScrollY = window.scrollY;
+      }
+    });
+
+    function updateScroll() {
+      currentScrollY += (targetScrollY - currentScrollY) * easeSpeed;
+      window.scrollTo(0, currentScrollY);
+
+      if (Math.abs(targetScrollY - currentScrollY) > 0.3) {
+        requestAnimationFrame(updateScroll);
+      } else {
+        isMoving = false;
+        window.scrollTo(0, targetScrollY);
+      }
+    }
+  }
+
 });

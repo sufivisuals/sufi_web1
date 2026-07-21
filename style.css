@@ -1673,10 +1673,7 @@ footer {
   will-change: transform, opacity;
 }
 
-.reveal.revealed.section-header,
-.reveal.revealed.contact-wrapper h2,
-.reveal.revealed .section-header,
-.reveal.revealed .contact-wrapper h2 {
+.reveal.revealed .section-header, .reveal.revealed .contact-wrapper h2 {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
