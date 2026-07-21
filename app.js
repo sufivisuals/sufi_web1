@@ -382,4 +382,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- PAIN POINTS SCROLL FOCUS HIGHLIGHT ---
+  const painCards = document.querySelectorAll('#struggles .pain-card');
+  if (painCards.length > 0) {
+    const cardObserverOptions = {
+      root: null,
+      rootMargin: '-30% 0px -30% 0px',
+      threshold: 0.2
+    };
+
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('scroll-active');
+        } else {
+          entry.target.classList.remove('scroll-active');
+        }
+      });
+    }, cardObserverOptions);
+
+    painCards.forEach(card => cardObserver.observe(card));
+  }
+
 });
