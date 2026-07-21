@@ -722,6 +722,12 @@ nav ul li a:hover {
   display: inline-block;
 }
 
+#makeup-artistry .section-label,
+#short-form .section-label {
+  font-size: 0.95rem;
+  letter-spacing: 0.16em;
+}
+
 .section-title {
   font-size: 3rem;
   font-weight: 800;
