@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
-        if (entry.target.id === 'client-results') {
+        if (entry.target.classList.contains('results-grid')) {
           animateCountUp();
         }
         observer.unobserve(entry.target);
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -120px 0px'
   });
 
   revealElements.forEach(el => revealObserver.observe(el));
@@ -382,16 +382,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- PAIN POINTS SCROLL FOCUS HIGHLIGHT ---
-  const painCards = document.querySelectorAll('#struggles .pain-card');
-  if (painCards.length > 0) {
-    const cardObserverOptions = {
+  // --- PAIN POINTS & CARDS SCROLL FOCUS HIGHLIGHT ---
+  const scrollHighlightElements = document.querySelectorAll(
+    '#struggles .pain-card, ' +
+    '#services .service-card, ' +
+    '#growth-system .timeline-step, ' +
+    '#makeup-artistry .reel-card, ' +
+    '#short-form .reel-card'
+  );
+
+  if (scrollHighlightElements.length > 0) {
+    const highlightObserverOptions = {
       root: null,
       rootMargin: '-30% 0px -30% 0px',
-      threshold: 0.2
+      threshold: 0.1
     };
 
-    const cardObserver = new IntersectionObserver((entries) => {
+    const highlightObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('scroll-active');
@@ -399,9 +406,9 @@ document.addEventListener('DOMContentLoaded', () => {
           entry.target.classList.remove('scroll-active');
         }
       });
-    }, cardObserverOptions);
+    }, highlightObserverOptions);
 
-    painCards.forEach(card => cardObserver.observe(card));
+    scrollHighlightElements.forEach(el => highlightObserver.observe(el));
   }
 
 });
