@@ -77,14 +77,14 @@ a {
 }
 
 section {
-  padding: 120px 0;
+  padding: 80px 0;
   position: relative;
   border-bottom: 1px solid var(--border-dark);
 }
 
 @media (max-width: 768px) {
   section {
-    padding: 80px 0;
+    padding: 50px 0;
   }
 }
 
@@ -345,8 +345,8 @@ nav ul li a:hover {
 
 /* --- HERO SECTION --- */
 #hero {
-  padding-top: 130px;
-  padding-bottom: 80px;
+  padding-top: 100px;
+  padding-bottom: 60px;
   text-align: center;
   background: radial-gradient(circle at 50% 10%, rgba(197, 168, 128, 0.08), transparent 50%), var(--bg-dark);
   position: relative;
@@ -677,7 +677,7 @@ nav ul li a:hover {
   border-top: 1px solid var(--border-dark);
   border-bottom: 1px solid var(--border-dark);
   background: #0f0f0f;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 
 .stats-marquee-wrapper::before, .stats-marquee-wrapper::after {
@@ -885,7 +885,7 @@ nav ul li a:hover {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 
 @media (max-width: 992px) {
@@ -1384,7 +1384,7 @@ nav ul li a:hover {
 
 /* --- FINAL CTA & FOOTER --- */
 #contact {
-  padding: 140px 0;
+  padding: 90px 0;
   text-align: center;
   background: radial-gradient(circle at 50% 90%, rgba(197, 168, 128, 0.08), transparent 50%), var(--bg-dark);
 }
@@ -1673,7 +1673,10 @@ footer {
   will-change: transform, opacity;
 }
 
-.reveal.revealed .section-header, .reveal.revealed .contact-wrapper h2 {
+.reveal.revealed.section-header,
+.reveal.revealed.contact-wrapper h2,
+.reveal.revealed .section-header,
+.reveal.revealed .contact-wrapper h2 {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
@@ -2121,6 +2124,112 @@ footer {
   width: 100%;
   height: 100%;
   overflow: visible;
+}
+
+/* Timeframe Row Layout */
+.ig-timeframe-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.timeframe-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.filter-bubble-right {
+  background: #1c1c1e;
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Percentage Followers Row */
+.ig-pct-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.pct-followers {
+  color: #e02484;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.pct-non-followers {
+  color: #8c34f0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* Line Chart with Axis Column Layout */
+.chart-container-with-axis {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  font-size: 0.65rem;
+  color: #8e8e93;
+  width: 12px;
+  margin-right: 6px;
+  text-align: right;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.chart-wrapper-svg {
+  flex-grow: 1;
+  height: 100%;
+  position: relative;
+}
+
+/* Legend Row styles */
+.chart-legend-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 8px 0 16px 0;
+  font-size: 0.68rem;
+  color: #8e8e93;
+  flex-shrink: 0;
+}
+
+.chart-legend-row span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Bottom Bar Chart layouts */
+.ig-bar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.ig-bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .mini-chart-container {

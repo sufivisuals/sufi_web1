@@ -411,5 +411,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     scrollHighlightElements.forEach(el => highlightObserver.observe(el));
   }
-
 });
