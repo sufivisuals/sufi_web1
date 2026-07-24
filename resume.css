@@ -1,0 +1,270 @@
+/* Professional ATS-Optimized Single Page Resume Stylesheet */
+
+/* --- Page Reset & Setup --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  color: #2c3e50; /* Charcoal text for high readability */
+  background-color: #f7f9fa; /* Light background for browser viewing */
+  line-height: 1.45;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Container --- */
+.resume-container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 40px 50px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  min-height: 297mm; /* Standard A4 height */
+}
+
+/* --- Header Section --- */
+.resume-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 12px;
+}
+
+.profile-photo {
+  width: 95px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 2px;
+  border: 1px solid #d1d5db;
+}
+
+.header-details {
+  flex: 1;
+}
+
+.candidate-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a252f; /* Deep blue/black accent for candidate name */
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.contact-info {
+  font-size: 12.5px;
+  color: #5a6b7c;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-item a {
+  color: #5a6b7c;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-item a:hover {
+  color: #1a252f;
+  text-decoration: underline;
+}
+
+.contact-separator {
+  color: #cbd5e1;
+  font-weight: 300;
+}
+
+/* --- Section Dividers & General Structure --- */
+.section-divider {
+  border: 0;
+  height: 1px;
+  background-color: #e2e8f0;
+  margin: 14px 0;
+}
+
+.resume-section {
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1a252f;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  padding-bottom: 2px;
+}
+
+/* --- Professional Summary Section --- */
+.summary-text {
+  font-size: 13px;
+  color: #374151;
+  text-align: justify;
+}
+
+/* --- Education Section --- */
+.education-item {
+  margin-bottom: 4px;
+}
+
+.education-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+
+.institution-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a252f;
+}
+
+.education-date {
+  font-size: 12.5px;
+  color: #5a6b7c;
+  font-weight: 500;
+}
+
+.degree-info {
+  font-size: 13.5px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.cgpa-info {
+  font-size: 13px;
+  color: #4b5563;
+  margin-top: 1px;
+}
+
+/* --- Technical Skills Section --- */
+.skills-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.skill-row {
+  font-size: 13px;
+  color: #374151;
+}
+
+.skill-label {
+  font-weight: 700;
+  color: #1a252f;
+  margin-right: 6px;
+  display: inline-block;
+  min-width: 175px; /* Aligns values vertically for premium presentation */
+}
+
+.skill-values {
+  color: #374151;
+}
+
+/* --- Projects Section --- */
+.project-item {
+  margin-bottom: 12px;
+}
+
+.project-item:last-child {
+  margin-bottom: 0;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+
+.project-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a252f;
+}
+
+.project-duration {
+  font-size: 12.5px;
+  color: #5a6b7c;
+  font-weight: 500;
+}
+
+.project-tech {
+  font-size: 12.5px;
+  color: #4b5563;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.project-bullets {
+  padding-left: 18px;
+  font-size: 13px;
+  color: #374151;
+}
+
+.project-bullets li {
+  margin-bottom: 3px;
+  line-height: 1.4;
+}
+
+.project-bullets li:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Print Stylesheet Configuration --- */
+@page {
+  size: A4;
+  margin: 15mm 15mm; /* Balanced print margins */
+}
+
+@media print {
+  body {
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 12px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .resume-container {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    min-height: 0;
+  }
+
+  .candidate-name {
+    color: #000000;
+  }
+
+  .section-title {
+    color: #000000;
+  }
+
+  .institution-name,
+  .project-name,
+  .skill-label {
+    color: #000000;
+  }
+
+  .contact-item a {
+    color: #000000;
+  }
+
+  .contact-separator {
+    color: #a1a1a1;
+  }
+
+  .section-divider {
+    background-color: #cccccc;
+  }
+}

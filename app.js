@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
-        if (entry.target.classList.contains('results-grid')) {
+        if (entry.target.id === 'client-results') {
           animateCountUp();
         }
         observer.unobserve(entry.target);
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, {
     threshold: 0.1,
-    rootMargin: '0px 0px -120px 0px'
+    rootMargin: '0px 0px -50px 0px'
   });
 
   revealElements.forEach(el => revealObserver.observe(el));
@@ -361,55 +361,6 @@ document.addEventListener('DOMContentLoaded', () => {
         bar.style.width = targetWidth;
       });
     }, 100);
-  }
-
-  // --- MOBILE MENU TOGGLE ---
-  const menuToggle = document.getElementById('menu-toggle');
-  const navMenu = document.querySelector('nav');
-  
-  if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
-      menuToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
-    });
-    
-    // Close menu when clicking on a link
-    navMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        navMenu.classList.remove('active');
-      });
-    });
-  }
-
-  // --- PAIN POINTS & CARDS SCROLL FOCUS HIGHLIGHT ---
-  const scrollHighlightElements = document.querySelectorAll(
-    '#struggles .pain-card, ' +
-    '#services .service-card, ' +
-    '#growth-system .timeline-step, ' +
-    '#makeup-artistry .reel-card, ' +
-    '#short-form .reel-card, ' +
-    '#client-results .phone-container'
-  );
-
-  if (scrollHighlightElements.length > 0) {
-    const highlightObserverOptions = {
-      root: null,
-      rootMargin: '-30% 0px -30% 0px',
-      threshold: 0.1
-    };
-
-    const highlightObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('scroll-active');
-        } else {
-          entry.target.classList.remove('scroll-active');
-        }
-      });
-    }, highlightObserverOptions);
-
-    scrollHighlightElements.forEach(el => highlightObserver.observe(el));
   }
 
 });
